@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Filip Neri Quotes</string>
+    <string name="menu_settings">Impostazioni</string>
+    <string name="menu_language">Lingua</string>
+    <string name="menu_preface">Prefazione</string>
+    <string name="menu_brochure">Opuscolo</string>
+    <string name="settings_title">Impostazioni</string>
+    <string name="settings_notifications">Notifica giornaliera</string>
+    <string name="settings_notifications_time">Ora della notifica</string>
+    <string name="language_auto">Automatico</string>
+    <string name="language_cs">Ceco</string>
+    <string name="language_pl">Polacco</string>
+    <string name="language_it">Italiano</string>
+    <string name="language_de">Tedesco</string>
+    <string name="language_es">Spagnolo</string>
+    <string name="language_fr">Francese</string>
+    <string name="language_en">Inglese</string>
+    <string name="language_select_title">Seleziona lingua</string>
+    <string name="attribution_text">Fonte delle citazioni: https://www.oratoriosanfilippo.org/</string>
+</resources>

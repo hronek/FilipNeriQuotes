@@ -1,0 +1,199 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="io.github.hronek.filipneriquotes"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+9        android:targetSdkVersion="36" />
+10
+11    <!-- Runtime on Android 13+, but declare for manifest visibility -->
+12    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+12-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:6:5-77
+12-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:6:22-74
+13    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+13-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:7:5-81
+13-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:7:22-78
+14    <!-- To allow exact alarms on Android 12+ -->
+15    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+15-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:9:5-79
+15-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:9:22-76
+16
+17    <permission
+17-->[androidx.core:core:1.10.1] C:\Users\User\.gradle\caches\8.13\transforms\587784050a68f2a8740699fd3192fbbe\transformed\core-1.10.1\AndroidManifest.xml:22:5-24:47
+18        android:name="io.github.hronek.filipneriquotes.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+18-->[androidx.core:core:1.10.1] C:\Users\User\.gradle\caches\8.13\transforms\587784050a68f2a8740699fd3192fbbe\transformed\core-1.10.1\AndroidManifest.xml:23:9-81
+19        android:protectionLevel="signature" />
+19-->[androidx.core:core:1.10.1] C:\Users\User\.gradle\caches\8.13\transforms\587784050a68f2a8740699fd3192fbbe\transformed\core-1.10.1\AndroidManifest.xml:24:9-44
+20
+21    <uses-permission android:name="io.github.hronek.filipneriquotes.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+21-->[androidx.core:core:1.10.1] C:\Users\User\.gradle\caches\8.13\transforms\587784050a68f2a8740699fd3192fbbe\transformed\core-1.10.1\AndroidManifest.xml:26:5-97
+21-->[androidx.core:core:1.10.1] C:\Users\User\.gradle\caches\8.13\transforms\587784050a68f2a8740699fd3192fbbe\transformed\core-1.10.1\AndroidManifest.xml:26:22-94
+22
+23    <application
+23-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:11:5-52:19
+24        android:allowBackup="true"
+24-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:12:13-39
+25        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+25-->[androidx.core:core:1.10.1] C:\Users\User\.gradle\caches\8.13\transforms\587784050a68f2a8740699fd3192fbbe\transformed\core-1.10.1\AndroidManifest.xml:28:18-86
+26        android:dataExtractionRules="@xml/data_extraction_rules"
+26-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:13:13-69
+27        android:debuggable="true"
+28        android:extractNativeLibs="false"
+29        android:fullBackupContent="@xml/backup_rules"
+29-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:14:13-58
+30        android:icon="@mipmap/ic_launcher"
+30-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:15:13-47
+31        android:label="@string/app_name"
+31-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:16:13-45
+32        android:roundIcon="@mipmap/ic_launcher_round"
+32-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:17:13-58
+33        android:supportsRtl="true"
+33-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:18:13-39
+34        android:testOnly="true"
+35        android:theme="@style/Theme.FilipNeriQuotes" >
+35-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:19:13-57
+36        <activity
+36-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:20:9-22:44
+37            android:name="io.github.hronek.filipneriquotes.PrefaceActivity"
+37-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:21:17-48
+38            android:exported="false" />
+38-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:22:17-41
+39        <activity
+39-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:23:9-25:44
+40            android:name="io.github.hronek.filipneriquotes.BrochureActivity"
+40-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:24:17-49
+41            android:exported="false" />
+41-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:25:17-41
+42        <activity
+42-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:26:9-34:20
+43            android:name="io.github.hronek.filipneriquotes.MainActivity"
+43-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:27:17-45
+44            android:exported="true" >
+44-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:28:17-40
+45            <intent-filter>
+45-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:29:13-33:29
+46                <action android:name="android.intent.action.MAIN" />
+46-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:30:17-68
+46-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:30:25-66
+47
+48                <category android:name="android.intent.category.LAUNCHER" />
+48-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:32:17-76
+48-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:32:27-74
+49            </intent-filter>
+50        </activity>
+51        <activity
+51-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:35:9-37:43
+52            android:name="io.github.hronek.filipneriquotes.SettingsActivity"
+52-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:36:17-49
+53            android:exported="false" />
+53-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:37:17-41
+54
+55        <receiver
+55-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:39:9-41:43
+56            android:name="io.github.hronek.filipneriquotes.notifications.QuoteNotificationReceiver"
+56-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:40:17-72
+57            android:exported="false" />
+57-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:41:17-41
+58        <receiver
+58-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:43:9-51:20
+59            android:name="io.github.hronek.filipneriquotes.notifications.BootReceiver"
+59-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:44:17-59
+60            android:exported="true" >
+60-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:45:17-40
+61            <intent-filter>
+61-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:46:13-50:29
+62                <action android:name="android.intent.action.BOOT_COMPLETED" />
+62-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:47:17-79
+62-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:47:25-76
+63                <action android:name="android.intent.action.TIME_SET" />
+63-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:48:17-73
+63-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:48:25-70
+64                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+64-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:49:17-81
+64-->C:\git\FilipNeriQuotes\app\src\main\AndroidManifest.xml:49:25-78
+65            </intent-filter>
+66        </receiver>
+67
+68        <provider
+68-->[androidx.emoji2:emoji2:1.2.0] C:\Users\User\.gradle\caches\8.13\transforms\a08fc106930d7f866e1fbba9b7926130\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+69            android:name="androidx.startup.InitializationProvider"
+69-->[androidx.emoji2:emoji2:1.2.0] C:\Users\User\.gradle\caches\8.13\transforms\a08fc106930d7f866e1fbba9b7926130\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
+70            android:authorities="io.github.hronek.filipneriquotes.androidx-startup"
+70-->[androidx.emoji2:emoji2:1.2.0] C:\Users\User\.gradle\caches\8.13\transforms\a08fc106930d7f866e1fbba9b7926130\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
+71            android:exported="false" >
+71-->[androidx.emoji2:emoji2:1.2.0] C:\Users\User\.gradle\caches\8.13\transforms\a08fc106930d7f866e1fbba9b7926130\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
+72            <meta-data
+72-->[androidx.emoji2:emoji2:1.2.0] C:\Users\User\.gradle\caches\8.13\transforms\a08fc106930d7f866e1fbba9b7926130\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+73                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+73-->[androidx.emoji2:emoji2:1.2.0] C:\Users\User\.gradle\caches\8.13\transforms\a08fc106930d7f866e1fbba9b7926130\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
+74                android:value="androidx.startup" />
+74-->[androidx.emoji2:emoji2:1.2.0] C:\Users\User\.gradle\caches\8.13\transforms\a08fc106930d7f866e1fbba9b7926130\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+75            <meta-data
+75-->[androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\User\.gradle\caches\8.13\transforms\e790ebcd6ec93bcdd6dd626a3db53677\transformed\lifecycle-process-2.6.1\AndroidManifest.xml:29:13-31:52
+76                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+76-->[androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\User\.gradle\caches\8.13\transforms\e790ebcd6ec93bcdd6dd626a3db53677\transformed\lifecycle-process-2.6.1\AndroidManifest.xml:30:17-78
+77                android:value="androidx.startup" />
+77-->[androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\User\.gradle\caches\8.13\transforms\e790ebcd6ec93bcdd6dd626a3db53677\transformed\lifecycle-process-2.6.1\AndroidManifest.xml:31:17-49
+78            <meta-data
+78-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\User\.gradle\caches\8.13\transforms\b91491046b574bd444d12eeefc2230ca\transformed\profileinstaller-1.3.0\AndroidManifest.xml:29:13-31:52
+79                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+79-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\User\.gradle\caches\8.13\transforms\b91491046b574bd444d12eeefc2230ca\transformed\profileinstaller-1.3.0\AndroidManifest.xml:30:17-85
+80                android:value="androidx.startup" />
+80-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\User\.gradle\caches\8.13\transforms\b91491046b574bd444d12eeefc2230ca\transformed\profileinstaller-1.3.0\AndroidManifest.xml:31:17-49
+81        </provider>
+82
+83        <uses-library
+83-->[androidx.window:window:1.0.0] C:\Users\User\.gradle\caches\8.13\transforms\caee8e53863c4dd547d2ec56996217bf\transformed\window-1.0.0\AndroidManifest.xml:25:9-27:40
+84            android:name="androidx.window.extensions"
+84-->[androidx.window:window:1.0.0] C:\Users\User\.gradle\caches\8.13\transforms\caee8e53863c4dd547d2ec56996217bf\transformed\window-1.0.0\AndroidManifest.xml:26:13-54
+85            android:required="false" />
+85-->[androidx.window:window:1.0.0] C:\Users\User\.gradle\caches\8.13\transforms\caee8e53863c4dd547d2ec56996217bf\transformed\window-1.0.0\AndroidManifest.xml:27:13-37
+86        <uses-library
+86-->[androidx.window:window:1.0.0] C:\Users\User\.gradle\caches\8.13\transforms\caee8e53863c4dd547d2ec56996217bf\transformed\window-1.0.0\AndroidManifest.xml:28:9-30:40
+87            android:name="androidx.window.sidecar"
+87-->[androidx.window:window:1.0.0] C:\Users\User\.gradle\caches\8.13\transforms\caee8e53863c4dd547d2ec56996217bf\transformed\window-1.0.0\AndroidManifest.xml:29:13-51
+88            android:required="false" />
+88-->[androidx.window:window:1.0.0] C:\Users\User\.gradle\caches\8.13\transforms\caee8e53863c4dd547d2ec56996217bf\transformed\window-1.0.0\AndroidManifest.xml:30:13-37
+89
+90        <receiver
+90-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\User\.gradle\caches\8.13\transforms\b91491046b574bd444d12eeefc2230ca\transformed\profileinstaller-1.3.0\AndroidManifest.xml:34:9-52:20
+91            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+91-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\User\.gradle\caches\8.13\transforms\b91491046b574bd444d12eeefc2230ca\transformed\profileinstaller-1.3.0\AndroidManifest.xml:35:13-76
+92            android:directBootAware="false"
+92-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\User\.gradle\caches\8.13\transforms\b91491046b574bd444d12eeefc2230ca\transformed\profileinstaller-1.3.0\AndroidManifest.xml:36:13-44
+93            android:enabled="true"
+93-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\User\.gradle\caches\8.13\transforms\b91491046b574bd444d12eeefc2230ca\transformed\profileinstaller-1.3.0\AndroidManifest.xml:37:13-35
+94            android:exported="true"
+94-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\User\.gradle\caches\8.13\transforms\b91491046b574bd444d12eeefc2230ca\transformed\profileinstaller-1.3.0\AndroidManifest.xml:38:13-36
+95            android:permission="android.permission.DUMP" >
+95-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\User\.gradle\caches\8.13\transforms\b91491046b574bd444d12eeefc2230ca\transformed\profileinstaller-1.3.0\AndroidManifest.xml:39:13-57
+96            <intent-filter>
+96-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\User\.gradle\caches\8.13\transforms\b91491046b574bd444d12eeefc2230ca\transformed\profileinstaller-1.3.0\AndroidManifest.xml:40:13-42:29
+97                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+97-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\User\.gradle\caches\8.13\transforms\b91491046b574bd444d12eeefc2230ca\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:17-91
+97-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\User\.gradle\caches\8.13\transforms\b91491046b574bd444d12eeefc2230ca\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:25-88
+98            </intent-filter>
+99            <intent-filter>
+99-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\User\.gradle\caches\8.13\transforms\b91491046b574bd444d12eeefc2230ca\transformed\profileinstaller-1.3.0\AndroidManifest.xml:43:13-45:29
+100                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+100-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\User\.gradle\caches\8.13\transforms\b91491046b574bd444d12eeefc2230ca\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:17-85
+100-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\User\.gradle\caches\8.13\transforms\b91491046b574bd444d12eeefc2230ca\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:25-82
+101            </intent-filter>
+102            <intent-filter>
+102-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\User\.gradle\caches\8.13\transforms\b91491046b574bd444d12eeefc2230ca\transformed\profileinstaller-1.3.0\AndroidManifest.xml:46:13-48:29
+103                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+103-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\User\.gradle\caches\8.13\transforms\b91491046b574bd444d12eeefc2230ca\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:17-88
+103-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\User\.gradle\caches\8.13\transforms\b91491046b574bd444d12eeefc2230ca\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:25-85
+104            </intent-filter>
+105            <intent-filter>
+105-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\User\.gradle\caches\8.13\transforms\b91491046b574bd444d12eeefc2230ca\transformed\profileinstaller-1.3.0\AndroidManifest.xml:49:13-51:29
+106                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+106-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\User\.gradle\caches\8.13\transforms\b91491046b574bd444d12eeefc2230ca\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:17-95
+106-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\User\.gradle\caches\8.13\transforms\b91491046b574bd444d12eeefc2230ca\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:25-92
+107            </intent-filter>
+108        </receiver>
+109    </application>
+110
+111</manifest>

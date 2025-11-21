@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Filip Neri Quotes</string>
+    <string name="menu_settings">Ustawienia</string>
+    <string name="menu_language">Język</string>
+    <string name="menu_preface">Przedmowa</string>
+    <string name="menu_brochure">Broszura</string>
+    <string name="settings_title">Ustawienia</string>
+    <string name="settings_notifications">Codzienne powiadomienie</string>
+    <string name="settings_notifications_time">Godzina powiadomienia</string>
+    <string name="language_auto">Automatycznie</string>
+    <string name="language_cs">Czeski</string>
+    <string name="language_pl">Polski</string>
+    <string name="language_it">Włoski</string>
+    <string name="language_de">Niemiecki</string>
+    <string name="language_es">Hiszpański</string>
+    <string name="language_fr">Francuski</string>
+    <string name="language_en">Angielski</string>
+    <string name="language_select_title">Wybierz język</string>
+    <string name="attribution_text">Źródło cytatów: https://www.oratoriosanfilippo.org/</string>
+</resources>

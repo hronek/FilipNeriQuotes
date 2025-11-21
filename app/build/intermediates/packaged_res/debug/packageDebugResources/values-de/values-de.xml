@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Filip Neri Quotes</string>
+    <string name="attribution_text">Quelle der Zitate: https://www.oratoriosanfilippo.org/</string>
+    <string name="language_auto">Automatisch</string>
+    <string name="language_cs">Tschechisch</string>
+    <string name="language_de">Deutsch</string>
+    <string name="language_en">Englisch</string>
+    <string name="language_es">Spanisch</string>
+    <string name="language_fr">Französisch</string>
+    <string name="language_it">Italienisch</string>
+    <string name="language_pl">Polnisch</string>
+    <string name="language_select_title">Sprache wählen</string>
+    <string name="menu_brochure">Broschüre</string>
+    <string name="menu_language">Sprache</string>
+    <string name="menu_preface">Vorwort</string>
+    <string name="menu_settings">Einstellungen</string>
+    <string name="settings_notifications">Tägliche Benachrichtigung</string>
+    <string name="settings_notifications_time">Benachrichtigungszeit</string>
+    <string name="settings_title">Einstellungen</string>
+</resources>

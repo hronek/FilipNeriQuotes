@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.preference.SwitchPreferenceCompat
+        android:key="notif_enabled"
+        android:title="@string/settings_notifications"
+        android:defaultValue="false" />
+
+    <androidx.preference.Preference
+        android:key="notif_time"
+        android:title="@string/settings_notifications_time"
+        android:summary="08:00" />
+
+    <androidx.preference.ListPreference
+        android:key="app_theme"
+        android:title="@string/settings_theme"
+        android:entries="@array/settings_theme_entries"
+        android:entryValues="@array/settings_theme_values"
+        android:defaultValue="system" />
+</androidx.preference.PreferenceScreen>
