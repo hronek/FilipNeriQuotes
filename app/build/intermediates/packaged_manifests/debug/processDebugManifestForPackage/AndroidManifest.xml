@@ -31,7 +31,6 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:testOnly="true"
         android:theme="@style/Theme.FilipNeriQuotes" >
         <activity
             android:name="io.github.hronek.filipneriquotes.PrefaceActivity"
@@ -50,6 +49,9 @@
         </activity>
         <activity
             android:name="io.github.hronek.filipneriquotes.SettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name="io.github.hronek.filipneriquotes.QuotesActivity"
             android:exported="false" />
 
         <receiver

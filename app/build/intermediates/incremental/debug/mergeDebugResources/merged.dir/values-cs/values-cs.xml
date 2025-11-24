@@ -40,6 +40,7 @@
     <string name="bottomsheet_action_expand_halfway">Rozbalit napůl</string>
     <string name="bottomsheet_drag_handle_clicked">Dvakrát jste klepli na úchyt pro přetažení</string>
     <string name="bottomsheet_drag_handle_content_description">Úchyt pro přetažení</string>
+    <string name="btn_today">Dnes</string>
     <string msgid="881409763997275156" name="call_notification_answer_action">"Přijmout"</string>
     <string msgid="8793775615905189152" name="call_notification_answer_video_action">"Video"</string>
     <string msgid="3229508546291798546" name="call_notification_decline_action">"Odmítnout"</string>
@@ -64,7 +65,7 @@
     <string name="language_fr">Francouzština</string>
     <string name="language_it">Italština</string>
     <string name="language_pl">Polština</string>
-    <string name="language_select_title">Vyber jazyk</string>
+    <string name="language_select_title">Vyberte jazyk</string>
     <string name="material_clock_toggle_content_description">Vyberte AM nebo PM</string>
     <string name="material_hour_24h_suffix">%1$s hodin</string>
     <string name="material_hour_selection">Vyberte hodinu</string>
@@ -79,10 +80,9 @@
     <string name="material_timepicker_select_time">Vyberte čas</string>
     <string name="material_timepicker_text_input_mode_description">Chcete-li zadat čas, přepněte na režim textu.</string>
     <string name="menu_brochure">Brožura</string>
-    <string name="menu_invert_colors">Invertovat barvy</string>
-    <string name="menu_invert_colors_summary">Invertovat barvy v brožuře pro lepší čitelnost</string>
     <string name="menu_language">Jazyk</string>
     <string name="menu_preface">Předmluva</string>
+    <string name="menu_quotes">Citáty</string>
     <string name="menu_settings">Nastavení</string>
     <string name="mtrl_badge_numberless_content_description">Nové oznámení</string>
     <string name="mtrl_chip_close_icon_content_description">Odstranit položku %1$s</string>
@@ -130,10 +130,9 @@
     <string name="password_toggle_content_description">Zobrazit heslo</string>
     <string msgid="6685851473431805375" name="preference_copied">"Položka <ns1:g id="SUMMARY">%1$s</ns1:g> byla zkopírována do schránky."</string>
     <string msgid="6264217191555673260" name="search_menu_title">"Hledat"</string>
-    <string name="settings_notifications">Denní notifikace</string>
-    <string name="settings_notifications_time">Čas notifikace</string>
-    <string name="settings_theme">Motiv vzhledu</string>
-    <string name="settings_theme_system">Podle systému</string>
+    <string name="settings_nav_buttons">Zobrazit navigační tlačítka</string>
+    <string name="settings_notifications">Denní upozornění</string>
+    <string name="settings_notifications_time">Čas upozornění</string>
     <string name="settings_title">Nastavení</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
     <string msgid="9167775378838880170" name="summary_collapsed_preference_list">"<ns1:g id="CURRENT_ITEMS">%1$s</ns1:g>, <ns1:g id="ADDED_ITEMS">%2$s</ns1:g>"</string>

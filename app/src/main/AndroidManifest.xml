@@ -36,6 +36,10 @@
                 android:name=".SettingsActivity"
                 android:exported="false"/>
 
+        <activity
+                android:name=".QuotesActivity"
+                android:exported="false" />
+
         <receiver
                 android:name=".notifications.QuoteNotificationReceiver"
                 android:exported="false"/>

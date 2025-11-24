@@ -16,4 +16,9 @@
         android:entries="@array/settings_theme_entries"
         android:entryValues="@array/settings_theme_values"
         android:defaultValue="system" />
+
+    <androidx.preference.SwitchPreferenceCompat
+        android:key="nav_buttons"
+        android:title="@string/settings_nav_buttons"
+        android:defaultValue="false" />
 </androidx.preference.PreferenceScreen>

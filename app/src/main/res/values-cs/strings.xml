@@ -5,8 +5,8 @@
     <string name="menu_preface">Předmluva</string>
     <string name="menu_brochure">Brožura</string>
     <string name="settings_title">Nastavení</string>
-    <string name="settings_notifications">Denní notifikace</string>
-    <string name="settings_notifications_time">Čas notifikace</string>
+    <string name="settings_notifications">Denní upozornění</string>
+    <string name="settings_notifications_time">Čas upozornění</string>
     <string name="language_auto">Automaticky</string>
     <string name="language_cs">Čeština</string>
     <string name="language_pl">Polština</string>
@@ -15,6 +15,9 @@
     <string name="language_es">Španělština</string>
     <string name="language_fr">Francouzština</string>
     <string name="language_en">Angličtina</string>
-    <string name="language_select_title">Vyber jazyk</string>
+    <string name="language_select_title">Vyberte jazyk</string>
     <string name="attribution_text">Zdroj citátů: https://www.oratoriosanfilippo.org/</string>
+    <string name="settings_nav_buttons">Zobrazit navigační tlačítka</string>
+    <string name="btn_today">Dnes</string>
+    <string name="menu_quotes">Citáty</string>
 </resources>

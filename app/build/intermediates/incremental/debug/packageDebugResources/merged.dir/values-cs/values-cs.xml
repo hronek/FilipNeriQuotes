@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">Filip Neri Quotes</string>
     <string name="attribution_text">Zdroj citátů: https://www.oratoriosanfilippo.org/</string>
+    <string name="btn_today">Dnes</string>
     <string name="language_auto">Automaticky</string>
     <string name="language_cs">Čeština</string>
     <string name="language_de">Němčina</string>
@@ -10,16 +11,14 @@
     <string name="language_fr">Francouzština</string>
     <string name="language_it">Italština</string>
     <string name="language_pl">Polština</string>
-    <string name="language_select_title">Vyber jazyk</string>
+    <string name="language_select_title">Vyberte jazyk</string>
     <string name="menu_brochure">Brožura</string>
-    <string name="menu_invert_colors">Invertovat barvy</string>
-    <string name="menu_invert_colors_summary">Invertovat barvy v brožuře pro lepší čitelnost</string>
     <string name="menu_language">Jazyk</string>
     <string name="menu_preface">Předmluva</string>
+    <string name="menu_quotes">Citáty</string>
     <string name="menu_settings">Nastavení</string>
-    <string name="settings_notifications">Denní notifikace</string>
-    <string name="settings_notifications_time">Čas notifikace</string>
-    <string name="settings_theme">Motiv vzhledu</string>
-    <string name="settings_theme_system">Podle systému</string>
+    <string name="settings_nav_buttons">Zobrazit navigační tlačítka</string>
+    <string name="settings_notifications">Denní upozornění</string>
+    <string name="settings_notifications_time">Čas upozornění</string>
     <string name="settings_title">Nastavení</string>
 </resources>

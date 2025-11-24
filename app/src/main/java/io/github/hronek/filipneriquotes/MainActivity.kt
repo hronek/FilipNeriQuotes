@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import android.widget.TextView
+import android.view.View
+import com.google.android.material.button.MaterialButton
 import io.github.hronek.filipneriquotes.data.QuoteRepository
 import java.time.LocalDate
 import android.view.Menu
@@ -16,11 +18,22 @@ import io.github.hronek.filipneriquotes.data.Prefs
 import com.google.android.material.appbar.MaterialToolbar
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
+import java.util.Locale
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.IntentFilter
 
 class MainActivity : AppCompatActivity() {
     private lateinit var tvQuote: TextView
     private lateinit var tvDate: TextView
     private lateinit var repo: QuoteRepository
+    private lateinit var navContainer: View
+    private lateinit var btnPrev: MaterialButton
+    private lateinit var btnToday: MaterialButton
+    private lateinit var btnNext: MaterialButton
+    private var currentDate: LocalDate = LocalDate.now()
+    private var userNavigatedByArrows: Boolean = false
+    private var timeTickReceiver: BroadcastReceiver? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,20 +59,60 @@ class MainActivity : AppCompatActivity() {
         tvQuote = findViewById(R.id.tvQuote)
         tvDate = findViewById(R.id.tvDate)
         repo = QuoteRepository(this)
+        // Navigation buttons
+        navContainer = findViewById(R.id.navButtons)
+        btnPrev = findViewById(R.id.btnPrev)
+        btnToday = findViewById(R.id.btnToday)
+        btnNext = findViewById(R.id.btnNext)
+        btnPrev.setOnClickListener {
+            currentDate = currentDate.minusDays(1)
+            userNavigatedByArrows = true
+            refreshQuote()
+        }
+        btnToday.setOnClickListener {
+            currentDate = LocalDate.now()
+            userNavigatedByArrows = false
+            refreshQuote()
+        }
+        btnNext.setOnClickListener {
+            currentDate = currentDate.plusDays(1)
+            userNavigatedByArrows = true
+            refreshQuote()
+        }
         // Show Preface on first launch
         if (!Prefs.isPrefaceShown(this)) {
             Prefs.setPrefaceShown(this, true)
             startActivity(Intent(this, PrefaceActivity::class.java))
         }
+        updateNavVisibility()
         refreshQuote()
     }
 
     private fun refreshQuote() {
-        val today = LocalDate.now()
         val lang = Prefs.getLanguage(this).let { if (it == "auto") null else it }
-        val dateStr = "%d/%d.".format(today.monthValue, today.dayOfMonth)
-        tvDate.text = dateStr
-        tvQuote.text = repo.getQuoteFor(today, lang)
+        tvDate.text = formatDate(currentDate)
+        tvQuote.text = repo.getQuoteFor(currentDate, lang)
+    }
+
+    private fun formatDate(date: LocalDate): String {
+        // Determine app language (explicit) or device language
+        val appLang = Prefs.getLanguage(this).let { if (it == "auto") Locale.getDefault().language else it }
+        val m = date.monthValue
+        val d = date.dayOfMonth
+        // Common conventions (no leading zeros by using single M and d semantics via manual build)
+        return when (appLang.lowercase(Locale.ROOT)) {
+            // Czech: day.month with dot separator, no leading zeros
+            "cs", "cz" -> "$d.$m"
+            // Polish & German: typically day.month with dot separator
+            "pl" -> "$d.$m"
+            "de" -> "$d.$m"
+            // French, Spanish, Italian: day/month with slash
+            "fr" -> "$d/$m"
+            "es" -> "$d/$m"
+            "it" -> "$d/$m"
+            // English (assume US-style): month/day with slash
+            else -> "$m/$d"
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -83,6 +136,10 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.action_brochure -> {
                 startActivity(Intent(this, BrochureActivity::class.java))
+                true
+            }
+            R.id.action_quotes -> {
+                startActivity(Intent(this, QuotesActivity::class.java))
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -116,6 +173,42 @@ class MainActivity : AppCompatActivity() {
             }
             .setNegativeButton(android.R.string.cancel, null)
             .show()
+    }
+
+    private fun checkDayChangeAutoRefresh() {
+        val now = LocalDate.now()
+        if (!userNavigatedByArrows && now != currentDate) {
+            currentDate = now
+            refreshQuote()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateNavVisibility()
+        checkDayChangeAutoRefresh()
+        if (timeTickReceiver == null) {
+            timeTickReceiver = object : BroadcastReceiver() {
+                override fun onReceive(context: Context?, intent: Intent?) {
+                    if (intent?.action == Intent.ACTION_TIME_TICK) {
+                        checkDayChangeAutoRefresh()
+                    }
+                }
+            }
+            registerReceiver(timeTickReceiver, IntentFilter(Intent.ACTION_TIME_TICK))
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        timeTickReceiver?.let {
+            try { unregisterReceiver(it) } catch (_: Exception) {}
+        }
+        timeTickReceiver = null
+    }
+
+    private fun updateNavVisibility() {
+        navContainer.visibility = if (Prefs.isNavButtonsEnabled(this)) View.VISIBLE else View.GONE
     }
 
 }

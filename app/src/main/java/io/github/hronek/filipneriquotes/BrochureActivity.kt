@@ -1,39 +1,30 @@
 package io.github.hronek.filipneriquotes
 
-import android.graphics.Bitmap
-import android.graphics.pdf.PdfRenderer
 import android.os.Bundle
-import android.os.ParcelFileDescriptor
-import android.util.LruCache
 import android.util.Log
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.Toast
+import android.webkit.WebView
+import android.webkit.WebViewClient
+import android.content.res.Configuration
+import android.view.MotionEvent
+import android.view.ScaleGestureDetector
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.appbar.MaterialToolbar
-import java.io.File
-import java.io.FileOutputStream
+import androidx.webkit.WebSettingsCompat
+import androidx.webkit.WebViewFeature
 import java.util.Locale
 import io.github.hronek.filipneriquotes.data.Prefs
-import android.graphics.Color
-import android.graphics.ColorMatrix
-import android.graphics.ColorMatrixColorFilter
+import java.io.InputStream
+import java.io.BufferedReader
+import java.io.InputStreamReader
 
 class BrochureActivity : AppCompatActivity() {
-    private var fileDescriptor: ParcelFileDescriptor? = null
-    private var renderer: PdfRenderer? = null
-    private lateinit var pager: ViewPager2
-    private lateinit var adapter: PdfPageAdapter
     private val TAG = "FNQ-Brochure"
-    private var nightMode: Boolean = false
-    private var invertFilter: ColorMatrixColorFilter? = null
+    private lateinit var webView: WebView
+    private lateinit var scaleDetector: ScaleGestureDetector
+    private var currentTextZoom: Int = 130
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,138 +41,134 @@ class BrochureActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar.setNavigationOnClickListener { finish() }
 
-        pager = findViewById(R.id.viewPager)
-
-        // Detect dark theme and prepare invert filter for PDF pages
-        nightMode = when (AppCompatDelegate.getDefaultNightMode()) {
-            AppCompatDelegate.MODE_NIGHT_YES -> true
-            AppCompatDelegate.MODE_NIGHT_NO -> false
-            else -> (resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK) == android.content.res.Configuration.UI_MODE_NIGHT_YES
+        webView = findViewById(R.id.webView)
+        configureWebView(webView)
+        // Scale detector to change only text size on pinch
+        scaleDetector = ScaleGestureDetector(this, object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
+            override fun onScale(detector: ScaleGestureDetector): Boolean {
+                val factor = detector.scaleFactor
+                // Convert pinch factor to a delta in text zoom, clamp to sensible range
+                val delta = ((factor - 1f) * 100).toInt()
+                currentTextZoom = (currentTextZoom + delta).coerceIn(80, 220)
+                webView.settings.textZoom = currentTextZoom
+                return true
+            }
+        })
+        webView.setOnTouchListener { _, event ->
+            scaleDetector.onTouchEvent(event)
+            // Consume when scaling, otherwise let WebView handle normal scrolling/taps
+            event.actionMasked == MotionEvent.ACTION_MOVE && scaleDetector.isInProgress
         }
-        if (nightMode) {
-            val m = ColorMatrix(floatArrayOf(
-                -1f, 0f, 0f, 0f, 255f,
-                 0f,-1f, 0f, 0f, 255f,
-                 0f, 0f,-1f, 0f, 255f,
-                 0f, 0f, 0f, 1f,   0f
-            ))
-            invertFilter = ColorMatrixColorFilter(m)
-        }
-
-        if (!openRenderer()) {
-            Toast.makeText(this, "Unable to open brochure", Toast.LENGTH_LONG).show()
-            finish()
-            return
-        }
-        val pageCount = (renderer?.pageCount ?: 0)
-        val targetWidth = resources.displayMetrics.widthPixels
-        adapter = PdfPageAdapter(renderer, pageCount, targetWidth, nightMode, invertFilter)
-        pager.adapter = adapter
+        loadBrochureHtml()
     }
 
-    private fun openRenderer(): Boolean {
-        // Choose language-specific brochure with fallback to Italian
-        val lang = Prefs.getLanguage(this).let { if (it == "auto") Locale.getDefault().language else it }
-        val assetName = when (lang.lowercase(Locale.ROOT)) {
-            "cs", "cz" -> "brochure_cs.pdf"
-            "pl" -> "brochure_pl.pdf"
-            "en" -> "brochure_en.pdf"
-            "de" -> "brochure_de.pdf"
-            "es" -> "brochure_es.pdf"
-            "fr" -> "brochure_fr.pdf"
-            else -> "brochure_it.pdf"
-        }
-        val cache = File(cacheDir, assetName)
-        if (!cache.exists()) {
+    private fun configureWebView(wv: WebView) {
+        wv.webViewClient = WebViewClient()
+        wv.settings.apply {
+            // We manage zoom as text size via pinch; disable built-in page zoom
+            builtInZoomControls = false
+            displayZoomControls = false
+            setSupportZoom(false)
+            useWideViewPort = true
+            loadWithOverviewMode = true
+            javaScriptEnabled = false
+            textZoom = currentTextZoom
+            // Reflow text to fit viewport when size changes (where supported)
             try {
-                val chosen = try { assets.open(assetName) } catch (e: Exception) {
-                    Log.w(TAG, "Missing $assetName in assets, falling back to brochure_it.pdf")
-                    assets.open("brochure_it.pdf")
-                }
-                chosen.use { input ->
-                    FileOutputStream(cache).use { output ->
-                        input.copyTo(output)
-                    }
-                }
-            } catch (e: Exception) {
-                Log.e(TAG, "Failed to copy brochure to cache", e)
-                return false
-            }
+                @Suppress("DEPRECATION")
+                this.layoutAlgorithm = android.webkit.WebSettings.LayoutAlgorithm.TEXT_AUTOSIZING
+            } catch (_: Throwable) { }
         }
+
+        val isDark = (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
+        if (WebViewFeature.isFeatureSupported(WebViewFeature.ALGORITHMIC_DARKENING)) {
+            WebSettingsCompat.setAlgorithmicDarkeningAllowed(wv.settings, isDark)
+        } else if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
+            WebSettingsCompat.setForceDark(
+                wv.settings,
+                if (isDark) WebSettingsCompat.FORCE_DARK_ON else WebSettingsCompat.FORCE_DARK_OFF
+            )
+        }
+    }
+
+    private fun loadBrochureHtml() {
+        val lang = Prefs.getLanguage(this).let { if (it == "auto") Locale.getDefault().language else it }
+        val candidate = when (lang.lowercase(Locale.ROOT)) {
+            "cs", "cz" -> "brochure_cs.html"
+            "pl" -> "brochure_pl.html"
+            "en" -> "brochure_en.html"
+            "de" -> "brochure_de.html"
+            "es" -> "brochure_es.html"
+            "fr" -> "brochure_fr.html"
+            else -> "brochure_it.html"
+        }
+        val chosen = if (assetExists(candidate)) candidate else {
+            Log.w(TAG, "Missing $candidate in assets, falling back to brochure_it.html")
+            if (assetExists("brochure_it.html")) "brochure_it.html" else candidate
+        }
+        // Read HTML, inject responsive meta/CSS to keep full width and scale text nicely
+        val html = readAssetText(chosen)
+        val enhanced = injectResponsiveHead(html)
+        webView.loadDataWithBaseURL(
+            "file:///android_asset/",
+            enhanced,
+            "text/html",
+            "UTF-8",
+            null
+        )
+    }
+
+    private fun assetExists(name: String): Boolean {
+        var input: InputStream? = null
         return try {
-            fileDescriptor = ParcelFileDescriptor.open(cache, ParcelFileDescriptor.MODE_READ_ONLY)
-            renderer = PdfRenderer(fileDescriptor!!)
+            input = assets.open(name)
             true
         } catch (e: Exception) {
-            Log.e(TAG, "Failed to open PdfRenderer", e)
             false
+        } finally {
+            try { input?.close() } catch (_: Exception) {}
         }
+    }
+
+    private fun readAssetText(name: String): String {
+        assets.open(name).use { input ->
+            BufferedReader(InputStreamReader(input, Charsets.UTF_8)).use { br ->
+                val sb = StringBuilder()
+                var line: String?
+                while (br.readLine().also { line = it } != null) {
+                    sb.append(line).append('\n')
+                }
+                return sb.toString()
+            }
+        }
+    }
+
+    private fun injectResponsiveHead(html: String): String {
+        val headInject = """
+            <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
+            <style>
+              html, body { max-width: 100%; overflow-x: hidden; }
+              body { margin: 16px; line-height: 1.65; }
+              img, iframe, table { max-width: 100%; height: auto; }
+              * { box-sizing: border-box; }
+              @media (prefers-color-scheme: dark) {
+                body { background: #121212; color: #e5e5e5; }
+                a { color: #8ab4f8; }
+              }
+            </style>
+        """.trimIndent()
+        val headTag = Regex("(?i)<head\\s*>")
+        if (headTag.containsMatchIn(html)) {
+            return headTag.replace(html, "$0\n$headInject\n")
+        }
+        val htmlTag = Regex("(?i)<html\\b[^>]*>")
+        if (htmlTag.containsMatchIn(html)) {
+            return htmlTag.replace(html, "$0\n<head>\n$headInject\n</head>\n")
+        }
+        return "<head>\n$headInject\n</head>\n$html"
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        try {
-            renderer?.close()
-        } catch (_: Exception) {}
-        try {
-            fileDescriptor?.close()
-        } catch (_: Exception) {}
-    }
-
-    private class PdfPageAdapter(
-        private val renderer: PdfRenderer?,
-        private val pageCount: Int,
-        private val targetWidth: Int,
-        private val nightMode: Boolean,
-        private val invertFilter: ColorMatrixColorFilter?
-    ) : RecyclerView.Adapter<PdfPageViewHolder>() {
-        private val cache = object : LruCache<Int, Bitmap>((8 * 1024 * 1024) /* 8MB */) {
-            override fun sizeOf(key: Int, value: Bitmap): Int {
-                return value.byteCount
-            }
-        }
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PdfPageViewHolder {
-            val iv = ImageView(parent.context)
-            iv.adjustViewBounds = false
-            iv.layoutParams = ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT
-            )
-            iv.scaleType = ImageView.ScaleType.FIT_CENTER
-            return PdfPageViewHolder(iv)
-        }
-
-        override fun getItemCount(): Int = pageCount
-
-        override fun onBindViewHolder(holder: PdfPageViewHolder, position: Int) {
-            val bmp = getPageBitmap(position)
-            holder.image.setImageBitmap(bmp)
-            if (nightMode) {
-                holder.image.colorFilter = invertFilter
-                holder.image.setBackgroundColor(Color.BLACK)
-            } else {
-                holder.image.clearColorFilter()
-                holder.image.setBackgroundColor(Color.TRANSPARENT)
-            }
-        }
-
-        private fun getPageBitmap(index: Int): Bitmap? {
-            cache.get(index)?.let { return it }
-            val r = renderer ?: return null
-            if (index < 0 || index >= r.pageCount) return null
-            r.openPage(index).use { page ->
-                val width = targetWidth.coerceAtLeast(400)
-                val height = (width.toFloat() * page.height.toFloat() / page.width.toFloat()).toInt().coerceAtLeast(400)
-                val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-                page.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
-                cache.put(index, bitmap)
-                return bitmap
-            }
-        }
-    }
-
-    private class PdfPageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val image: ImageView = itemView as ImageView
     }
 }

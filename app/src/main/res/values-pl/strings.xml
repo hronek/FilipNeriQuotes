@@ -17,4 +17,7 @@
     <string name="language_en">Angielski</string>
     <string name="language_select_title">Wybierz język</string>
     <string name="attribution_text">Źródło cytatów: https://www.oratoriosanfilippo.org/</string>
+    <string name="settings_nav_buttons">Pokaż przyciski nawigacji</string>
+    <string name="btn_today">Dziś</string>
+    <string name="menu_quotes">Cytaty</string>
 </resources>

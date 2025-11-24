@@ -21,4 +21,7 @@
     <string name="language_en">English</string>
     <string name="language_select_title">Select language</string>
     <string name="attribution_text">Quotes source: https://www.oratoriosanfilippo.org/</string>
+    <string name="settings_nav_buttons">Show navigation buttons</string>
+    <string name="btn_today">Today</string>
+    <string name="menu_quotes">Quotes</string>
 </resources>

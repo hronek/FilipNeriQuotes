@@ -2008,6 +2008,7 @@
     <string description="A description of an action that a user of an accessibility service can perform to expand a bottomsheet halfway to its full height. [CHAR LIMIT=25]" name="bottomsheet_action_expand_halfway">Expand halfway</string>
     <string description="An accessibility feedback when the bottom sheet drag handle is clicked [CHAR LIMIT=NONE]" name="bottomsheet_drag_handle_clicked">Drag handle double-tapped</string>
     <string description="The content description of bottom sheet drag handles [CHAR LIMIT=NONE]" name="bottomsheet_drag_handle_content_description">Drag handle</string>
+    <string name="btn_today">Today</string>
     <string name="call_notification_answer_action">Answer</string>
     <string name="call_notification_answer_video_action">Video</string>
     <string name="call_notification_decline_action">Decline</string>
@@ -2079,10 +2080,9 @@
     <string description="Title for the dialog with a time picker. [CHAR_LIMIT=32]" name="material_timepicker_select_time">Select time</string>
     <string name="material_timepicker_text_input_mode_description">Switch to text input mode for the time input.</string>
     <string name="menu_brochure">Brochure</string>
-    <string name="menu_invert_colors">Invert colors</string>
-    <string name="menu_invert_colors_summary">Invert colors in brochure for better readability</string>
     <string name="menu_language">Language</string>
     <string name="menu_preface">Preface</string>
+    <string name="menu_quotes">Quotes</string>
     <string name="menu_settings">Settings</string>
     <string description="Content description for new notification (no number count) [CHAR_LIMIT=NONE]" name="mtrl_badge_numberless_content_description">New notification</string>
     <string name="mtrl_checkbox_button_icon_path_checked" translatable="false">M14,18.2 11.4,15.6 10,17 14,21 22,13 20.6,11.6z</string>
@@ -2158,8 +2158,6 @@
     <string name="path_password_eye_mask_strike_through" translatable="false">M2,4.27 L19.73,22 L22.27,19.46 L4.54,1.73 L4.54,1 L23,1 L23,23 L1,23 L1,4.27 Z</string>
     <string name="path_password_eye_mask_visible" translatable="false">M2,4.27 L2,4.27 L4.54,1.73 L4.54,1.73 L4.54,1 L23,1 L23,23 L1,23 L1,4.27 Z</string>
     <string name="path_password_strike_through" translatable="false">M3.27,4.27 L19.74,20.74</string>
-    <string name="pref_theme_summary">Choose app theme</string>
-    <string name="pref_theme_title">Theme</string>
     <string name="preference_copied">
         \"<ns2:g example="Version 1.1" id="summary">%1$s</ns2:g>\" copied to clipboard.
     </string>
@@ -2169,6 +2167,7 @@
   </string>
     <string description="Content description for the X button to clear text [CHAR_LIMIT=NONE]" name="searchview_clear_text_content_description">Clear text</string>
     <string description="Content description for the navigation button to return to the previous screen [CHAR_LIMIT=NONE]" name="searchview_navigation_content_description">Back</string>
+    <string name="settings_nav_buttons">Show navigation buttons</string>
     <string name="settings_notifications">Daily notification</string>
     <string name="settings_notifications_time">Notification time</string>
     <string name="settings_theme">Theme</string>

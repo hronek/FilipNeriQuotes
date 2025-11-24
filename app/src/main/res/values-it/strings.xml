@@ -15,6 +15,9 @@
     <string name="language_es">Spagnolo</string>
     <string name="language_fr">Francese</string>
     <string name="language_en">Inglese</string>
-    <string name="language_select_title">Seleziona lingua</string>
+    <string name="language_select_title">Seleziona la lingua</string>
     <string name="attribution_text">Fonte delle citazioni: https://www.oratoriosanfilippo.org/</string>
+    <string name="settings_nav_buttons">Mostra pulsanti di navigazione</string>
+    <string name="btn_today">Oggi</string>
+    <string name="menu_quotes">Citazioni</string>
 </resources>

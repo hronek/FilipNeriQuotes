@@ -1,0 +1,15 @@
+-keep class j$.time.Duration {
+  public int getNano();
+  public long getSeconds();
+  public static j$.time.Duration ofSeconds(long, long);
+}
+-keep class j$.time.LocalDate {
+  public int getDayOfMonth();
+  public int getMonthValue();
+  public j$.time.LocalDate minusDays(long);
+  public static j$.time.LocalDate now();
+  public j$.time.LocalDate plusDays(long);
+}
+-keep class j$.util.DesugarTimeZone {
+  public static java.util.TimeZone getTimeZone(java.lang.String);
+}

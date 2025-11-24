@@ -18,10 +18,14 @@ import android.content.Intent
 import android.provider.Settings
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.ListPreference
+import androidx.activity.enableEdgeToEdge
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 
 class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         supportFragmentManager
             .beginTransaction()
             .replace(android.R.id.content, SettingsFragment())
@@ -38,6 +42,7 @@ class SettingsActivity : AppCompatActivity() {
             val notifSwitch = findPreference<SwitchPreferenceCompat>("notif_enabled")
             val notifTimePref = findPreference<Preference>("notif_time")
             val themePref = findPreference<ListPreference>("app_theme")
+            val navButtons = findPreference<SwitchPreferenceCompat>("nav_buttons")
 
             notifSwitch?.isChecked = Prefs.isNotifEnabled(requireContext())
             notifSwitch?.setOnPreferenceChangeListener { _, newValue ->
@@ -111,6 +116,29 @@ class SettingsActivity : AppCompatActivity() {
                 true
             }
             themePref?.let { applyTheme(it.value) }
+
+            // Navigation buttons toggle
+            navButtons?.isChecked = Prefs.isNavButtonsEnabled(requireContext())
+            navButtons?.setOnPreferenceChangeListener { _, newValue ->
+                val enabled = newValue as Boolean
+                Prefs.setNavButtonsEnabled(requireContext(), enabled)
+                true
+            }
+        }
+
+        override fun onViewCreated(view: android.view.View, savedInstanceState: Bundle?) {
+            super.onViewCreated(view, savedInstanceState)
+            // Apply system bar insets as padding so preferences don't overlap the status bar
+            ViewCompat.setOnApplyWindowInsetsListener(view) { v, insets ->
+                val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+                v.setPadding(
+                    v.paddingLeft,
+                    v.paddingTop + systemBars.top,
+                    v.paddingRight,
+                    v.paddingBottom + systemBars.bottom
+                )
+                insets
+            }
         }
 
         override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {

@@ -11,6 +11,7 @@ object Prefs {
     private const val KEY_NOTIF_MINUTE = "notif_minute"
     private const val KEY_PREFACE_SHOWN = "preface_shown"
     private const val KEY_THEME = "app_theme" // values: system, light, dark
+    private const val KEY_NAV_BUTTONS = "nav_buttons" // show navigation buttons on main screen
 
     private fun prefs(ctx: Context): SharedPreferences =
         ctx.getSharedPreferences(FILE, Context.MODE_PRIVATE)
@@ -34,4 +35,8 @@ object Prefs {
 
     fun getTheme(ctx: Context): String = prefs(ctx).getString(KEY_THEME, "system") ?: "system"
     fun setTheme(ctx: Context, theme: String) { prefs(ctx).edit().putString(KEY_THEME, theme).apply() }
+
+    fun isNavButtonsEnabled(ctx: Context): Boolean = prefs(ctx).getBoolean(KEY_NAV_BUTTONS, false)
+    fun setNavButtonsEnabled(ctx: Context, enabled: Boolean) { prefs(ctx).edit().putBoolean(KEY_NAV_BUTTONS, enabled).apply() }
 }
+

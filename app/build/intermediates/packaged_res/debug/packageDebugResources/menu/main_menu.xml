@@ -17,4 +17,8 @@
         android:id="@+id/action_brochure"
         android:title="@string/menu_brochure"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_quotes"
+        android:title="@string/menu_quotes"
+        app:showAsAction="never" />
 </menu>
