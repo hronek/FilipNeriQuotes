@@ -26,6 +26,7 @@ import android.content.IntentFilter
 class MainActivity : AppCompatActivity() {
     private lateinit var tvQuote: TextView
     private lateinit var tvDate: TextView
+    private lateinit var tvAttribution: TextView
     private lateinit var repo: QuoteRepository
     private lateinit var navContainer: View
     private lateinit var btnPrev: MaterialButton
@@ -58,12 +59,15 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         tvQuote = findViewById(R.id.tvQuote)
         tvDate = findViewById(R.id.tvDate)
+        tvAttribution = findViewById(R.id.tvAttribution)
         repo = QuoteRepository(this)
         // Navigation buttons
         navContainer = findViewById(R.id.navButtons)
         btnPrev = findViewById(R.id.btnPrev)
         btnToday = findViewById(R.id.btnToday)
         btnNext = findViewById(R.id.btnNext)
+        // Explicitly refresh resource-based texts to avoid stale state restore after locale change
+        refreshStaticTexts()
         btnPrev.setOnClickListener {
             currentDate = currentDate.minusDays(1)
             userNavigatedByArrows = true
@@ -183,10 +187,28 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
+    override fun onPause() {
+        super.onPause()
+        timeTickReceiver?.let {
+            try { unregisterReceiver(it) } catch (_: Exception) {}
+        }
+        timeTickReceiver = null
+    }
+
+    private fun refreshStaticTexts() {
+        btnToday.setText(R.string.btn_today)
+        tvAttribution.setText(R.string.attribution_text)
+    }
+
     override fun onResume() {
         super.onResume()
         updateNavVisibility()
         checkDayChangeAutoRefresh()
+        // Ensure texts are correct after possible view state restoration
+        refreshStaticTexts()
+        // Post one more refresh to run after any late state restore that might overwrite text
+        btnToday.post { refreshStaticTexts() }
         if (timeTickReceiver == null) {
             timeTickReceiver = object : BroadcastReceiver() {
                 override fun onReceive(context: Context?, intent: Intent?) {
@@ -197,14 +219,6 @@ class MainActivity : AppCompatActivity() {
             }
             registerReceiver(timeTickReceiver, IntentFilter(Intent.ACTION_TIME_TICK))
         }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        timeTickReceiver?.let {
-            try { unregisterReceiver(it) } catch (_: Exception) {}
-        }
-        timeTickReceiver = null
     }
 
     private fun updateNavVisibility() {

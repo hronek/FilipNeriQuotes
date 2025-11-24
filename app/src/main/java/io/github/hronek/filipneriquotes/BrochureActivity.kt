@@ -95,11 +95,11 @@ class BrochureActivity : AppCompatActivity() {
         val lang = Prefs.getLanguage(this).let { if (it == "auto") Locale.getDefault().language else it }
         val candidate = when (lang.lowercase(Locale.ROOT)) {
             "cs", "cz" -> "brochure_cs.html"
-            "pl" -> "brochure_pl.html"
+            "pl" -> "brochure_pol.html"
             "en" -> "brochure_en.html"
             "de" -> "brochure_de.html"
-            "es" -> "brochure_es.html"
-            "fr" -> "brochure_fr.html"
+            "es" -> "brochure_spa.html"
+            "fr" -> "brochure_fra.html"
             else -> "brochure_it.html"
         }
         val chosen = if (assetExists(candidate)) candidate else {
